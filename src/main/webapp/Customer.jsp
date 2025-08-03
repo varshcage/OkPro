@@ -67,11 +67,11 @@
     </div>
     <nav class="mt-6">
         <div class="px-4 space-y-1">
-            <a href="dashboard.jsp" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
+            <a href="admin-dashboard.jsp" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
                 <i class="fas fa-tachometer-alt mr-3"></i>
                 Dashboard
             </a>
-            <a href="Book.jsp" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
+            <a href="BookServlet" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
                 <i class="fas fa-book mr-3"></i>
                 Books
             </a>
