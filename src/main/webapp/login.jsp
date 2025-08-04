@@ -1,11 +1,10 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Haven - Login</title>
+  <title>Book Haven - Admin Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -21,10 +20,6 @@
       transform: translateY(-5px);
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
-    .role-btn.active {
-      background-color: #4f46e5;
-      color: white;
-    }
     .input-field:focus {
       box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
     }
@@ -37,24 +32,10 @@
       <i class="fas fa-book-open text-5xl text-indigo-600"></i>
     </div>
     <h1 class="text-3xl font-bold text-gray-800 mb-2">PahanEdu Book</h1>
-    <p class="text-gray-600">Login to access your account</p>
+    <p class="text-gray-600">Admin Login</p>
   </div>
 
-  <!-- 🔁 UPDATE: Now sends to LoginServlet -->
   <form id="login-form" method="post" action="LoginServlet" class="space-y-4">
-
-    <!-- Role Selection -->
-    <div class="flex justify-center mb-6">
-      <div class="inline-flex rounded-md shadow-sm" role="group">
-        <button type="button" id="admin-btn" class="role-btn active px-4 py-2 text-sm font-medium rounded-l-lg border border-gray-200 hover:bg-indigo-50">
-          <i class="fas fa-user-shield mr-2"></i>Admin
-        </button>
-        <button type="button" id="cashier-btn" class="role-btn px-4 py-2 text-sm font-medium rounded-r-lg border border-gray-200 hover:bg-indigo-50">
-          <i class="fas fa-cash-register mr-2"></i>Cashier
-        </button>
-      </div>
-    </div>
-
     <!-- Username -->
     <div>
       <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
@@ -64,7 +45,7 @@
         </div>
         <input type="text" id="username" name="username" required
                class="input-field pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 border"
-               placeholder="Enter your username">
+               placeholder="Enter admin username">
       </div>
     </div>
 
@@ -77,7 +58,7 @@
         </div>
         <input type="password" id="password" name="password" required
                class="input-field pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 border"
-               placeholder="Enter your password">
+               placeholder="Enter admin password">
         <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 pr-3 flex items-center">
           <i class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
         </button>
@@ -111,25 +92,9 @@
 <!-- JavaScript Logic -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const adminBtn = document.getElementById('admin-btn');
-    const cashierBtn = document.getElementById('cashier-btn');
     const togglePassword = document.getElementById('toggle-password');
     const passwordInput = document.getElementById('password');
     const loginForm = document.getElementById('login-form');
-    let userRole = 'admin'; // Default role
-
-    // Toggle role buttons
-    adminBtn.addEventListener('click', function() {
-      adminBtn.classList.add('active');
-      cashierBtn.classList.remove('active');
-      userRole = 'admin';
-    });
-
-    cashierBtn.addEventListener('click', function() {
-      cashierBtn.classList.add('active');
-      adminBtn.classList.remove('active');
-      userRole = 'cashier';
-    });
 
     // Toggle password visibility
     togglePassword.addEventListener('click', function() {
@@ -145,19 +110,18 @@
       }
     });
 
-    // Inject role as hidden input before submit
+    // Set role as admin before submit
     loginForm.addEventListener('submit', function() {
       const existing = document.querySelector('input[name="role"]');
-      if (existing) existing.remove(); // prevent duplicates
+      if (existing) existing.remove();
 
       const roleInput = document.createElement('input');
       roleInput.type = 'hidden';
       roleInput.name = 'role';
-      roleInput.value = userRole;
+      roleInput.value = 'admin';
       loginForm.appendChild(roleInput);
     });
   });
 </script>
 </body>
 </html>
-

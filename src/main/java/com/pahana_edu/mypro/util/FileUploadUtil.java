@@ -1,38 +1,31 @@
 package com.pahana_edu.mypro.util;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 public class FileUploadUtil {
-    public static String getFileName(Part part) {
-        if (part == null) {
-            return null;
-        }
-        String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(";");
-        for (String s : items) {
-            if (s.trim().startsWith("filename")) {
-                return s.substring(s.indexOf("=") + 2, s.length() - 1);
-            }
-        }
-        return null;
-    }
+    public static String uploadFile(Part part, String uploadDirectory, HttpServletRequest request) throws IOException {
+        // Get the application's real path
+        String appPath = request.getServletContext().getRealPath("");
+        String uploadPath = appPath + File.separator + uploadDirectory;
 
-    public static String generateUniqueFileName(String fileName) {
-        String ext = "";
-        int i = fileName.lastIndexOf('.');
-        if (i > 0) {
-            ext = fileName.substring(i);
-        }
-        return UUID.randomUUID().toString() + ext;
-    }
+        // Create the upload directory if it doesn't exist
+        Files.createDirectories(Paths.get(uploadPath));
 
-    public static void createUploadDirectory(String path) throws IOException {
-        File uploadDir = new File(path);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
-        }
+        // Generate a unique filename
+        String fileName = part.getSubmittedFileName();
+        String fileExtension = fileName.substring(fileName.lastIndexOf("."));
+        String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
+
+        // Save the file
+        part.write(uploadPath + File.separator + uniqueFileName);
+
+        // Return the relative path to store in database
+        return uploadDirectory + "/" + uniqueFileName;
     }
 }
