@@ -93,7 +93,7 @@ public class AddBookServlet extends HttpServlet {
         }
 
         // Redirect back to book page
-        response.sendRedirect("Book.jsp");
+        response.sendRedirect("BookServlet");
     }
 
     // Helper method to get file name from part

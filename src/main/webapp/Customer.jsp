@@ -175,8 +175,7 @@
                                 <c:if test="${not empty customer.photoPath}">
                                     <img src="${pageContext.request.contextPath}/${customer.photoPath}" alt="Customer Photo" class="h-10 w-10 rounded-full object-cover">
                                 </c:if>
-                                <c:if test="${empty customer.photoPath}">
-                                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                <c:if test="${empty customer.photoPath}"><div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
                                         <i class="fas fa-user text-gray-400"></i>
                                     </div>
                                 </c:if>
