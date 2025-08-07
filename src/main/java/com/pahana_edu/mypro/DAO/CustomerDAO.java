@@ -118,10 +118,6 @@ public class CustomerDAO {
         }
     }
 
-
-    
-
-    // Delete customer
     public boolean deleteCustomer(int id) throws SQLException {
         String query = "DELETE FROM customers WHERE id = ?";
 
@@ -131,5 +127,27 @@ public class CustomerDAO {
         }
     }
 
+    public int countAllCustomers() throws SQLException {
+        String query = "SELECT COUNT(*) FROM customers";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
 
+    // Get count of active customers
+    public int countActiveCustomers() throws SQLException {
+        String query = "SELECT COUNT(*) FROM customers WHERE status = true";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+
+    }
 }
