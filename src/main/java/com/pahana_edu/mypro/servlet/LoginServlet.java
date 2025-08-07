@@ -20,9 +20,9 @@ public class LoginServlet extends HttpServlet {
     private static final String DB_PASS = "varshcage";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String role = request.getParameter("role");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String role = "admin"; // Hardcoding role to admin only
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -42,13 +42,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("username", username);
                 session.setAttribute("role", role);
 
-                if (role.equals("admin")) {
-                    response.sendRedirect("AdminDashboardServlet");
-                } else {
-                    response.sendRedirect("cashier-dashboard.jsp");
-                }
+                response.sendRedirect("AdminDashboardServlet");
             } else {
-                request.setAttribute("error", "Invalid login credentials.");
+                request.setAttribute("error", "Invalid admin credentials.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
@@ -61,6 +57,4 @@ public class LoginServlet extends HttpServlet {
             response.getWriter().println("Database error: " + e.getMessage());
         }
     }
-
-    }
-
+}
