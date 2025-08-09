@@ -8,7 +8,4 @@ CREATE TABLE IF NOT EXISTS books (
     stock_quantity INT NOT NULL DEFAULT 0,
     description TEXT,
     cover_image_path VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
 

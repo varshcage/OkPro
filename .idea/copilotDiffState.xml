@@ -3,14 +3,6 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
-        <entry key="$PROJECT_DIR$/src/main/resources/books.sql">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/src/main/resources/books.sql" />
-              <option name="updatedContent" value="CREATE TABLE IF NOT EXISTS books (&#10;    id INT PRIMARY KEY AUTO_INCREMENT,&#10;    title VARCHAR(255) NOT NULL,&#10;    author VARCHAR(255) NOT NULL,&#10;    isbn VARCHAR(50) UNIQUE NOT NULL,&#10;    category VARCHAR(100) NOT NULL,&#10;    price DECIMAL(10,2) NOT NULL,&#10;    stock_quantity INT NOT NULL DEFAULT 0,&#10;    description TEXT,&#10;    cover_image_path VARCHAR(255),&#10;    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,&#10;    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP&#10;);" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/src/main/webapp/BookAdd.jsp">
           <value>
             <PendingDiffInfo>

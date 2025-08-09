@@ -141,6 +141,35 @@ public class BookDAO {
         return 0;
     }
 
+    // Get top N books (for dashboard display)
+    public List<Book> getTopBooks(int limit) throws SQLException {
+        List<Book> books = new ArrayList<>();
+        String query = "SELECT * FROM books ORDER BY id DESC LIMIT ?"; // Adjust order by field if needed
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, limit);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Book book = new Book();
+                    book.setId(resultSet.getInt("id"));
+                    book.setTitle(resultSet.getString("title"));
+                    book.setAuthor(resultSet.getString("author"));
+                    book.setIsbn(resultSet.getString("isbn"));
+                    book.setCategory(resultSet.getString("category"));
+                    book.setPrice(resultSet.getDouble("price"));
+                    book.setQuantity(resultSet.getInt("quantity"));
+                    book.setPublisher(resultSet.getString("publisher"));
+                    Date publishedDate = resultSet.getDate("published_date");
+                    book.setPublishedDate(publishedDate != null ? publishedDate.toLocalDate() : null);
+                    book.setDescription(resultSet.getString("description"));
+                    book.setCoverImagePath(resultSet.getString("cover_image_path"));
+
+                    books.add(book);
+                }
+            }
+        }
+        return books;
+    }
 
 
 }

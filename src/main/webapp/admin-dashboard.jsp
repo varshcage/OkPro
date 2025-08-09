@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,21 +177,77 @@
       </div>
     </div>
 
-    <!-- Charts Section -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-      <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Books Added (Last 7 Days)</h2>
-        <canvas id="booksChart" height="200"></canvas>
-      </div>
+    <div class="mt-10 bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Customers</h2>
+      <table class="w-full text-left table-auto border-collapse">
+        <thead>
+        <tr class="bg-gray-100">
+          <th class="px-4 py-2">Name</th>
+          <th class="px-4 py-2">Email</th>
+          <th class="px-4 py-2">Phone</th>
+          <th class="px-4 py-2">Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="customer" items="${topCustomers}">
+          <tr class="border-b">
+            <td class="px-4 py-2 flex items-center space-x-3">
+              <div class="relative w-10 h-10">
+                <img src="${pageContext.request.contextPath}/${customer.photoPath}" alt="Photo"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                <!-- Hidden icon by default -->
+                <i class="fas fa-user-circle text-gray-400 text-2xl absolute top-0 left-0" style="display:none;"></i>
+              </div>
+              <span>${customer.name}</span>
+            </td>
 
 
-      <div class="bg-white p-6 rounded-lg shadow">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Customers Added (Last 7 Days)</h2>
-        <canvas id="customersChart" height="200"></canvas>
-      </div>
+            <td class="px-4 py-2">${customer.email}</td>
+            <td class="px-4 py-2">${customer.phone}</td>
+            <td class="px-4 py-2">${customer.country}</td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
     </div>
 
 
+
+    <div class="mt-6 bg-white p-6 rounded-lg shadow">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Recent Books</h2>
+      <table class="w-full text-left table-auto border-collapse">
+        <thead>
+        <tr class="bg-gray-100">
+          <th class="px-4 py-2">Title</th>
+          <th class="px-4 py-2">Author</th>
+          <th class="px-4 py-2">ISBN</th>
+          <th class="px-4 py-2">Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="book" items="${topBooks}">
+          <tr class="border-b">
+            <td class="px-4 py-2 flex items-center space-x-3">
+              <div class="relative w-10 h-14">
+                <img src="${pageContext.request.contextPath}/${book.coverImagePath}" alt="Cover"
+                     class="w-10 h-14 object-cover border border-gray-300 rounded"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                <!-- Hidden icon by default -->
+                <i class="fas fa-book text-gray-400 text-2xl absolute top-0 left-0" style="display:none;"></i>
+              </div>
+              <span>${book.title}</span>
+            </td>
+
+
+            <td class="px-4 py-2">${book.author}</td>
+            <td class="px-4 py-2">${book.isbn}</td>
+            <td class="px-4 py-2">${book.category}</td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+    </div>
 
     <!-- Billing Info Chart -->
     <div class="bg-white rounded-lg shadow overflow-hidden">

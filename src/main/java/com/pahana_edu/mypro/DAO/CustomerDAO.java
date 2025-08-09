@@ -150,4 +150,34 @@ public class CustomerDAO {
         return 0;
 
     }
+    // Get top N customers (for dashboard display)
+    public List<Customer> getTopCustomers(int limit) throws SQLException {
+        List<Customer> customers = new ArrayList<>();
+        String query = "SELECT * FROM customers ORDER BY id DESC LIMIT ?"; // DESC = most recent
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, limit);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Customer customer = new Customer();
+                    customer.setId(resultSet.getInt("id"));
+                    customer.setName(resultSet.getString("name"));
+                    customer.setEmail(resultSet.getString("email"));
+                    customer.setPhone(resultSet.getString("phone"));
+                    Date dob = resultSet.getDate("dob");
+                    customer.setDob(dob != null ? dob.toLocalDate() : null);
+                    customer.setAddress(resultSet.getString("address"));
+                    customer.setCity(resultSet.getString("city"));
+                    customer.setCountry(resultSet.getString("country"));
+                    customer.setActive(resultSet.getBoolean("status"));
+                    customer.setNotes(resultSet.getString("notes"));
+                    customer.setPhotoPath(resultSet.getString("photo_path"));
+
+                    customers.add(customer);
+                }
+            }
+        }
+        return customers;
+    }
+
 }
