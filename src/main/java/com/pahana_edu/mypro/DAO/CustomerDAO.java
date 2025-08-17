@@ -179,5 +179,27 @@ public class CustomerDAO {
         }
         return customers;
     }
+    // Search customers by name, email, or phone
+    public List<Customer> searchCustomers(String searchTerm) throws SQLException {
+        List<Customer> customers = new ArrayList<>();
+        String query = "SELECT * FROM customers WHERE name LIKE ? OR email LIKE ? OR phone LIKE ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            String likeTerm = "%" + searchTerm + "%";
+            statement.setString(1, likeTerm);
+            statement.setString(2, likeTerm);
+            statement.setString(3, likeTerm);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Customer customer = new Customer();
+                    // Set customer properties as in your getAllCustomers method
+                    customers.add(customer);
+                }
+            }
+        }
+
+        return customers;
+    }
 
 }

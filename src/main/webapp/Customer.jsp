@@ -79,11 +79,11 @@
                 <i class="fas fa-users mr-3"></i>
                 Customers
             </a>
-            <a href="Bill.jsp" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
+            <a href="CreateBillServlet" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
                 <i class="fa-solid fa-money-bill mr-3"></i>
                 Billing
             </a>
-            <a href="reports.jsp" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
+            <a href="BillServlet" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
                 <i class="fas fa-chart-line mr-3"></i>
                 Reports
             </a>

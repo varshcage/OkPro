@@ -35,6 +35,16 @@
     <p class="text-gray-600">Admin Login</p>
   </div>
 
+  <%-- Error message display --%>
+  <% if (request.getAttribute("error") != null) { %>
+  <div class="mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700">
+    <div class="flex items-center">
+      <i class="fas fa-exclamation-circle mr-2"></i>
+      <p><%= request.getAttribute("error") %></p>
+    </div>
+  </div>
+  <% } %>
+
   <form id="login-form" method="post" action="LoginServlet" class="space-y-4">
     <!-- Username -->
     <div>
@@ -45,7 +55,8 @@
         </div>
         <input type="text" id="username" name="username" required
                class="input-field pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 border"
-               placeholder="Enter admin username">
+               placeholder="Enter admin username"
+               value="<%= request.getParameter("username") != null ? request.getParameter("username") : "" %>">
       </div>
     </div>
 
@@ -64,8 +75,6 @@
         </button>
       </div>
     </div>
-
-    <!-- Remember Me -->
 
     <!-- Submit -->
     <div>

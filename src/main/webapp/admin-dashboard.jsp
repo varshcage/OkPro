@@ -66,7 +66,7 @@
   </div>
   <nav class="mt-6">
     <div class="px-4 space-y-1">
-      <a href="admin-dashboard.jsp" class="flex items-center px-4 py-3 text-white bg-indigo-900 rounded-lg">
+      <a href="AdminDashboardServlet" class="flex items-center px-4 py-3 text-white bg-indigo-900 rounded-lg">
         <i class="fas fa-tachometer-alt mr-3"></i>
         Dashboard
       </a>
@@ -82,7 +82,7 @@
         <i class="fa-solid fa-money-bill mr-3"></i>
         Billing
       </a>
-      <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
+      <a href="Report.jsp" class="flex items-center px-4 py-3 text-indigo-200 hover:text-white hover:bg-indigo-700 rounded-lg">
         <i class="fas fa-chart-line mr-3"></i>
         Reports
       </a>
@@ -250,16 +250,16 @@
     </div>
 
     <!-- Billing Info Chart -->
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-      <div class="px-6 py-4 border-b border-gray-200 bg-blue-600 text-white">
-        <h3 class="text-lg font-medium">Monthly Sales</h3>
-      </div>
-      <div class="p-6">
-        <canvas id="billingChart" height="100"></canvas>
-      </div>
-    </div>
-  </main>
-</div>
+<%--    <div class="bg-white rounded-lg shadow overflow-hidden">--%>
+<%--      <div class="px-6 py-4 border-b border-gray-200 bg-blue-600 text-white">--%>
+<%--        <h3 class="text-lg font-medium">Monthly Sales</h3>--%>
+<%--      </div>--%>
+<%--      <div class="p-6">--%>
+<%--        <canvas id="billingChart" height="100"></canvas>--%>
+<%--      </div>--%>
+<%--    </div>--%>
+<%--  </main>--%>
+<%--</div>--%>
 
 
 

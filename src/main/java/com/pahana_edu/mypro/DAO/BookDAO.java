@@ -15,6 +15,8 @@ public class BookDAO {
         this.connection = connection;
     }
 
+
+
     // Add a new book
     public boolean addBook(Book book) throws SQLException {
         String query = "INSERT INTO books (title, author, isbn, category, price, quantity, " +
@@ -170,6 +172,33 @@ public class BookDAO {
         }
         return books;
     }
+    public boolean decreaseStock(int bookId, int qty) throws SQLException {
+        String sql = "UPDATE books SET quantity = quantity - ? WHERE id = ? AND quantity >= ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, qty);
+            stmt.setInt(2, bookId);
+            stmt.setInt(3, qty); // Ensure we don't go negative
+            return stmt.executeUpdate() > 0;
+        }
+    }
+    public boolean updateBookStock(int bookId, int quantityChange) throws SQLException {
+        if (quantityChange == 0) {
+            return true; // No change needed
+        }
 
+        String sql;
+        if (quantityChange > 0) {
+            sql = "UPDATE books SET quantity = quantity + ? WHERE id = ?";
+        } else {
+            // For negative changes, ensure we don't go below zero
+            sql = "UPDATE books SET quantity = GREATEST(0, quantity + ?) WHERE id = ?";
+        }
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, quantityChange);
+            stmt.setInt(2, bookId);
+            return stmt.executeUpdate() > 0;
+        }
+    }
 
 }
